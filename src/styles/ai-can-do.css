@@ -1,0 +1,87 @@
+.ai-can-do {
+  box-sizing: border-box;
+  padding: clamp(56px, 9vh, 100px) clamp(16px, 5vw, 48px) clamp(64px, 10vh, 112px);
+  background-color: rgb(32, 32, 32);
+  color: #fff;
+  font-family: var(--bs-font-sans-serif, "Manrope", system-ui, sans-serif);
+}
+
+.ai-can-do__inner {
+  width: 100%;
+  max-width: 900px;
+  margin-inline: auto;
+  text-align: left;
+}
+
+.ai-can-do__title {
+  margin: 0 0 clamp(28px, 4vw, 40px);
+  font-size: clamp(22px, 2.35vw + 14px, 44px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.ai-can-do__list {
+  margin: 0;
+  padding: 0 0 0 1.2em;
+  list-style: disc;
+}
+
+.ai-can-do__item {
+  margin: 0;
+  padding-left: 0.35em;
+  font-size: clamp(15px, 0.35vw + 14px, 19px);
+  font-weight: 400;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.ai-can-do__item + .ai-can-do__item {
+  margin-top: clamp(14px, 2vw, 20px);
+}
+
+.ai-can-do__item-title {
+  font-weight: 700;
+  color: #fff;
+}
+
+.ai-can-do__list ::marker {
+  color: #fff;
+  font-size: 0.55em;
+}
+
+.ai-can-do__outro {
+  margin: clamp(28px, 4vw, 40px) 0 0;
+  font-size: clamp(15px, 0.35vw + 14px, 19px);
+  font-weight: 400;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+@media (max-width: 576px) {
+  .ai-can-do {
+    padding: clamp(40px, 7vh, 64px) clamp(16px, 4vw, 24px) clamp(48px, 8vh, 80px);
+  }
+}
+
+@media (max-width: 360px) {
+  .ai-can-do {
+    padding-inline: 12px;
+  }
+
+  .ai-can-do__title {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .ai-can-do__item,
+  .ai-can-do__outro {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .ai-can-do__item-title {
+    font-size: inherit;
+  }
+}

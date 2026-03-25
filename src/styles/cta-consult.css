@@ -1,0 +1,153 @@
+.cta-consult {
+  box-sizing: border-box;
+  padding: clamp(56px, 9vh, 100px) clamp(16px, 5vw, 48px) clamp(64px, 10vh, 112px);
+  background-color: rgb(32, 32, 32);
+  color: #fff;
+  font-family: var(--bs-font-sans-serif, "Manrope", system-ui, sans-serif);
+  text-align: left;
+}
+
+.cta-consult__inner {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.cta-consult__copy {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 100%;
+  text-align: left;
+}
+
+.cta-consult__title {
+  margin: 0 0 clamp(28px, 4vw, 40px);
+  max-width: 38ch;
+  font-size: clamp(22px, 2.35vw + 14px, 44px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.cta-consult__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  width: 100%;
+  margin: 0 0 clamp(40px, 5vw, 48px);
+}
+
+.cta-consult__lead {
+  margin: 0;
+  max-width: 62ch;
+  font-size: clamp(15px, 0.35vw + 14px, 19px);
+  font-weight: 400;
+  line-height: 1.55;
+  color: #e0e0e0;
+}
+
+.cta-consult__lead + .cta-consult__lead {
+  margin-top: clamp(22px, 3vw, 32px);
+}
+
+.cta-consult__btn {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  align-self: flex-start;
+  width: fit-content;
+  max-width: 100%;
+  width: 40%;
+  padding: clamp(12px, 1.2vw, 15px) clamp(28px, 3vw, 35px);
+  border-radius: 50px;
+  font-size: clamp(15px, 0.35vw + 14px, 18px);
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  color: #ffffff;
+  background-color: #6a35ab;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  box-shadow:
+    0 0 22px rgba(106, 53, 171, 0.55),
+    0 4px 20px rgba(106, 53, 171, 0.4);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  margin: 0 auto;
+}
+
+.cta-consult__btn:hover {
+  background-color: #7b42c2;
+  box-shadow:
+    0 0 28px rgba(106, 53, 171, 0.65),
+    0 6px 24px rgba(106, 53, 171, 0.45);
+}
+
+.cta-consult__btn:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.85);
+  outline-offset: 3px;
+}
+
+@media (max-width: 576px) {
+
+  .cta-consult__btn {
+    width: 100%;
+  }
+
+  .cta-consult {
+    padding: clamp(40px, 7vh, 64px) clamp(16px, 4vw, 24px) clamp(48px, 8vh, 80px);
+  }
+
+  .cta-consult__title {
+    margin-bottom: clamp(22px, 5vw, 28px);
+    font-size: clamp(22px, 5.2vw, 28px);
+    line-height: 1.2;
+  }
+
+  .cta-consult__text {
+    margin-bottom: clamp(36px, 6vw, 44px);
+  }
+
+  .cta-consult__lead + .cta-consult__lead {
+    margin-top: clamp(18px, 4vw, 24px);
+  }
+}
+
+@media (max-width: 360px) {
+  .cta-consult {
+    padding: 36px 12px 44px;
+  }
+
+  .cta-consult__title {
+    margin-bottom: 20px;
+    max-width: none;
+    font-size: 20px;
+    line-height: 1.22;
+  }
+
+  .cta-consult__lead {
+    max-width: none;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .cta-consult__lead + .cta-consult__lead {
+    margin-top: 16px;
+  }
+
+  .cta-consult__text {
+    margin-bottom: 32px;
+  }
+
+  .cta-consult__btn {
+    padding: 12px 28px;
+    font-size: 14px;
+  }
+}

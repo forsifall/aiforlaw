@@ -1,0 +1,152 @@
+.ai-payback {
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+  max-width: 100%;
+  padding: clamp(48px, 7.5vw, 96px) clamp(16px, 4vw, 40px) clamp(52px, 8vw, 100px);
+  background-color: #141414;
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(10, 10, 10, 0.88) 0%,
+      rgba(10, 10, 10, 0.72) 42%,
+      rgba(10, 10, 10, 0.45) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.35) 0%,
+      rgba(0, 0, 0, 0.5) 100%
+    ),
+    url("../assets/images/chel_dumaet.avif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+  font-family: var(--bs-font-sans-serif, "Manrope", system-ui, sans-serif);
+}
+
+.ai-payback__inner {
+  width: 100%;
+  max-width: 1180px;
+  margin-inline: auto;
+}
+
+.ai-payback__copy {
+  max-width: min(1200px, 100%);
+  text-align: left;
+}
+
+.ai-payback__title {
+  margin: 0 0 clamp(28px, 4.2vw, 40px);
+  font-size: clamp(24px, 2.1vw + 14px, 42px);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+
+.ai-payback__lead {
+  margin: 0 0 clamp(22px, 3.2vw, 30px);
+  font-size: clamp(15px, 0.35vw + 14px, 18px);
+  font-weight: 400;
+  line-height: 1.55;
+  color: #fff;
+}
+
+.ai-payback__list-heading {
+  margin: 0 0 clamp(12px, 1.8vw, 16px);
+  font-size: clamp(15px, 0.35vw + 14px, 18px);
+  font-weight: 600;
+  line-height: 1.5;
+  color: #fff;
+}
+
+.ai-payback__list {
+  margin: 0;
+  padding: 0 0 0 1.15em;
+  list-style: disc;
+}
+
+.ai-payback__item {
+  margin: 0;
+  padding-left: 0.35em;
+  font-size: clamp(15px, 0.35vw + 14px, 18px);
+  font-weight: 400;
+  line-height: 1.52;
+  color: #fff;
+}
+
+.ai-payback__item + .ai-payback__item {
+  margin-top: clamp(8px, 1.2vw, 12px);
+}
+
+.ai-payback__list ::marker {
+  color: #fff;
+  font-size: 0.55em;
+}
+
+@media (max-width: 991px) {
+  .ai-payback {
+    background-image:
+      linear-gradient(
+        to bottom,
+        rgba(10, 10, 10, 0.82) 0%,
+        rgba(10, 10, 10, 0.78) 45%,
+        rgba(10, 10, 10, 0.55) 100%
+      ),
+      url("../assets/images/chel_dumaet.avif");
+    background-position: center top;
+  }
+
+  .ai-payback__copy {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .ai-payback {
+    padding: clamp(40px, 9vw, 56px) clamp(14px, 4vw, 20px) clamp(44px, 10vw, 64px);
+  }
+
+  .ai-payback__title {
+    margin-bottom: clamp(22px, 5vw, 28px);
+    font-size: clamp(22px, 5.2vw, 28px);
+    line-height: 1.2;
+  }
+
+  .ai-payback__lead {
+    margin-bottom: clamp(18px, 4vw, 24px);
+  }
+}
+
+@media (max-width: 360px) {
+  .ai-payback {
+    padding: 36px 12px 44px;
+  }
+
+  .ai-payback__title {
+    margin-bottom: 20px;
+    font-size: 20px;
+    line-height: 1.22;
+  }
+
+  .ai-payback__lead,
+  .ai-payback__list-heading,
+  .ai-payback__item {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .ai-payback__list-heading {
+    margin-bottom: 10px;
+  }
+
+  .ai-payback__list {
+    padding-left: 1em;
+  }
+
+  .ai-payback__item + .ai-payback__item {
+    margin-top: 8px;
+  }
+}

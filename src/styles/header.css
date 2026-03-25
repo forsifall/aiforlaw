@@ -1,0 +1,263 @@
+header {
+  background-color: rgb(32,32,32);
+  padding: 22px 25px 22px;
+}
+
+.main-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  overflow: hidden;
+  height: auto;
+  box-sizing: border-box;
+  transition:
+    height 450ms ease,
+    padding-top 450ms ease,
+    padding-bottom 450ms ease,
+    box-shadow 450ms ease;
+  box-shadow: 0 12px 38px rgba(0, 0, 0, 0.52);
+}
+
+.main-header--collapsed {
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+body {
+  /* Резерв места под фиксированную шапку; обновляется JS при изменении её высоты */
+  padding-top: var(--header-current-height, 0px);
+  transition: padding-top 450ms ease;
+}
+
+.site-header__row {
+  align-items: center;
+}
+
+
+
+/* cекция телефон  */
+.site-header__phone {
+  margin: 0;
+  min-width: 0;
+  text-align: right;
+}
+
+.site-header__phone-link {
+  font: normal normal normal 16px/1.4em var(--bs-font-sans-serif);
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-header__phone-link:hover {
+  text-decoration: underline;
+}
+
+/* секция общие кнопки в шапке */
+.site-header__btn {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color 0.4s ease,
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+/* секция скачать презентацию */
+.site-header__btn--download {
+  width: 208px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 5px;
+  border: 0 solid transparent;
+  font: normal normal normal 17px/1.4em var(--bs-font-sans-serif);
+  color: rgb(255, 255, 254);
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.site-header__btn--download:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgba(162, 56, 255, 0.15);
+}
+
+/* секция получить консультацию  */
+.site-header__btn--consult {
+  width: 262px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 50px;
+  border: 0 solid transparent;
+  font: normal normal normal 17px/1.4em var(--bs-font-sans-serif);
+  color: rgb(255, 255, 255);
+  background-color: rgba(162, 56, 255, 0.26);
+  box-shadow: 0 1px 20px 0 rgba(108, 37, 170, 1);
+}
+
+.site-header__btn--consult:hover {
+  background-color: rgb(34, 35, 35);
+  color: rgb(255, 255, 255);
+  box-shadow: 0 1px 20px 0 rgba(108, 37, 170, 0.85);
+}
+
+/* секция иконка телеграма */
+.site-header__telegram {
+  display: block;
+  flex-shrink: 0;
+  width: 50px;
+  height: 48px;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.site-header__telegram-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.site-header__telegram:hover .site-header__telegram-img {
+  opacity: 0.92;
+}
+
+/* ориентир ширины контента шапки; на широких экранах не разъезжается */
+.main-header .container {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 1439.98px) {
+  header {
+    padding: clamp(16px, 2.5vw, 25px) clamp(14px, 2.2vw, 25px) clamp(20px, 2.8vw, 32px);
+  }
+
+  .site-header__row {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    row-gap: 14px;
+    column-gap: clamp(12px, 1.5vw, 24px);
+  }
+
+  .site-header__btn--download {
+    flex: 0 1 208px;
+    width: auto;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .site-header__btn--consult {
+    flex: 0 1 262px;
+    width: auto;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .site-header__phone {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 1199.98px) and (min-width: 768px) {
+  .site-header__row {
+    align-items: center;
+  }
+
+  header {
+    padding-bottom: max(26px, 3vw);
+  }
+}
+
+@media (max-width: 991.98px) {
+  header {
+    padding-bottom: max(26px, 2.8vw);
+  }
+
+  .site-header__row {
+    row-gap: 12px;
+    column-gap: 12px;
+  }
+
+  .site-header__btn--download,
+  .site-header__btn--consult {
+    font-size: clamp(15px, 1.4vw + 10px, 17px);
+  }
+
+  .site-header__phone-link {
+    font-size: clamp(15px, 1vw + 11px, 16px);
+  }
+}
+
+@media (max-width: 767.98px) {
+  header {
+    padding: 16px 12px 24px;
+  }
+
+  .site-header__row {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 12px;
+  }
+
+  .site-header__phone {
+    text-align: center;
+  }
+
+  .site-header__btn--download {
+    flex: none;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    min-height: 40px;
+    padding: 10px 12px;
+    white-space: normal;
+    font-size: 16px;
+  }
+
+  .site-header__btn--consult {
+    flex: none;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    min-height: 40px;
+    padding: 10px 12px;
+    white-space: normal;
+    font-size: 16px;
+  }
+
+  .site-header__telegram {
+    display: none;
+  }
+}
+
+
+@media (max-width: 360px) {
+  header {
+    padding: 12px 10px;
+  }
+
+  .site-header__row {
+    gap: 10px;
+  }
+
+  .site-header__btn--download,
+  .site-header__btn--consult {
+    font-size: 15px;
+  }
+
+  .site-header__phone-link {
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,254 @@
+.impl-stages {
+  box-sizing: border-box;
+  padding: clamp(56px, 9vh, 100px) clamp(16px, 5vw, 48px) clamp(64px, 10vh, 112px);
+  background-color: rgb(32, 32, 32);
+  color: #fff;
+  font-family: var(--bs-font-sans-serif, "Manrope", system-ui, sans-serif);
+}
+
+.impl-stages__inner {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.impl-stages__title {
+  margin: 0 0 clamp(36px, 5vw, 48px);
+  font-size: clamp(22px, 2.35vw + 14px, 44px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: #fff;
+}
+
+.impl-stages__row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  margin: 0 0 clamp(40px, 6vw, 56px);
+  --impl-stages-h-step: clamp(32px, 4vw, 44px);
+  --impl-stages-card-pad-y: clamp(24px, 3.5vw, 34px);
+  --impl-stages-card-pad-x: clamp(18px, 2.8vw, 26px);
+  --impl-stages-hover-extra-pad: clamp(18px, 2.5vw, 28px);
+}
+
+.impl-stages__card {
+  box-sizing: border-box;
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  margin: 0;
+  padding: var(--impl-stages-card-pad-y) var(--impl-stages-card-pad-x)
+    calc(var(--impl-stages-card-pad-y) + var(--impl-card-hover-pad, 0px));
+  border: 1px solid #000;
+  background-color: #f5ece6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition:
+    padding-bottom 0.45s cubic-bezier(0.33, 1, 0.68, 1),
+    min-height 0.45s cubic-bezier(0.33, 1, 0.68, 1),
+    box-shadow 0.35s ease;
+  --impl-card-hover-pad: 0px;
+  --impl-card-hover-min-extra: 0px;
+}
+
+.impl-stages__card:focus {
+  outline: none;
+}
+
+.impl-stages__card:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.55);
+  outline-offset: 2px;
+  --impl-card-hover-pad: var(--impl-stages-hover-extra-pad);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+@media (min-width: 993px) {
+  .impl-stages__card:focus-visible {
+    --impl-card-hover-min-extra: clamp(6px, 1.2vw, 12px);
+  }
+}
+
+.impl-stages__card:focus-visible .impl-stages__card-arrow {
+  max-height: 2.5rem;
+  opacity: 1;
+  margin-top: clamp(10px, 1.8vw, 16px);
+  transform: translateY(0);
+}
+
+.impl-stages__card + .impl-stages__card {
+  margin-left: -1px;
+}
+
+/* Каждая следующая карточка чуть выше предыдущей только за счёт min-height */
+.impl-stages__card:nth-child(1) {
+  min-height: calc(clamp(130px, 14vw, 152px) + var(--impl-card-hover-min-extra));
+}
+
+.impl-stages__card:nth-child(2) {
+  min-height: calc(
+    clamp(130px, 14vw, 152px) + var(--impl-stages-h-step) + var(--impl-card-hover-min-extra)
+  );
+}
+
+.impl-stages__card:nth-child(3) {
+  min-height: calc(
+    clamp(130px, 14vw, 152px) + var(--impl-stages-h-step) * 2 + var(--impl-card-hover-min-extra)
+  );
+}
+
+.impl-stages__card:nth-child(4) {
+  min-height: calc(
+    clamp(130px, 14vw, 152px) + var(--impl-stages-h-step) * 3 + var(--impl-card-hover-min-extra)
+  );
+}
+
+.impl-stages__card-step {
+  margin: 0 0 clamp(10px, 1.5vw, 14px);
+  font-size: clamp(15px, 0.45vw + 14px, 18px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #202020;
+}
+
+.impl-stages__card-text {
+  margin: 0;
+  font-size: clamp(13px, 0.35vw + 12px, 16px);
+  font-weight: 400;
+  line-height: 1.45;
+  color: #3d3d3d;
+}
+
+.impl-stages__card-arrow {
+  display: block;
+  width: 100%;
+  flex-shrink: 0;
+  margin-top: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  font-size: clamp(1.2rem, 0.4vw + 1.05rem, 1.45rem);
+  font-weight: 700;
+  line-height: 1;
+  color: #202020;
+  transform: translateY(6px);
+  transition:
+    max-height 0.45s cubic-bezier(0.33, 1, 0.68, 1),
+    opacity 0.35s ease,
+    margin-top 0.45s cubic-bezier(0.33, 1, 0.68, 1),
+    transform 0.4s ease;
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .impl-stages__card:hover {
+    --impl-card-hover-pad: var(--impl-stages-hover-extra-pad);
+    --impl-card-hover-min-extra: clamp(6px, 1.2vw, 12px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  }
+
+  .impl-stages__card:hover .impl-stages__card-arrow {
+    max-height: 2.5rem;
+    opacity: 1;
+    margin-top: clamp(10px, 1.8vw, 16px);
+    transform: translateY(0);
+  }
+}
+
+.impl-stages__footnote {
+  margin: 0;
+  max-width: 100%;
+  font-size: clamp(14px, 0.55vw + 14px, 21px);
+  font-weight: 400;
+  line-height: 1.55;
+  text-align: start;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+@media (max-width: 992px) {
+  .impl-stages__row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: clamp(20px, 4vw, 28px);
+    max-width: min(100%, 560px);
+    margin-left: auto;
+    margin-right: auto;
+    --impl-stages-card-pad-y: clamp(26px, 4.5vw, 34px);
+    --impl-stages-card-pad-x: clamp(22px, 4.5vw, 32px);
+    --impl-stages-hover-extra-pad: clamp(16px, 3vw, 26px);
+  }
+
+  .impl-stages__card {
+    padding: 60px !important;;
+    transition:
+      padding-bottom 0.45s cubic-bezier(0.33, 1, 0.68, 1),
+      box-shadow 0.35s ease;
+  }
+
+  .impl-stages__card + .impl-stages__card {
+    margin-left: 0;
+  }
+
+  .impl-stages__card:nth-child(1),
+  .impl-stages__card:nth-child(2),
+  .impl-stages__card:nth-child(3),
+  .impl-stages__card:nth-child(4) {
+    min-height: 0;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .impl-stages__card:hover {
+      --impl-card-hover-min-extra: 0px;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .impl-stages {
+    padding: clamp(40px, 7vh, 64px) clamp(16px, 4vw, 24px) clamp(48px, 8vh, 80px);
+  }
+}
+
+@media (max-width: 360px) {
+  .impl-stages {
+    padding-inline: 12px;
+  }
+
+  .impl-stages__title {
+    font-size: 20px;
+    line-height: 1.2;
+    margin-bottom: 28px;
+  }
+
+  .impl-stages__card-step {
+    font-size: 15px;
+  }
+
+  .impl-stages__card-text {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .impl-stages__row {
+    --impl-stages-card-pad-y: clamp(22px, 5vw, 28px);
+    --impl-stages-card-pad-x: clamp(18px, 5vw, 24px);
+  }
+
+  .impl-stages__footnote {
+    font-size: clamp(14px, 3.8vw, 16px);
+    line-height: 1.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .impl-stages__card,
+  .impl-stages__card-arrow {
+    transition: none;
+  }
+}

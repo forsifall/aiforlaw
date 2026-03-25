@@ -1,0 +1,9 @@
+
+
+/*
+!/.gitignore
+
+!/src/
+!/src/**
+
+cursor_rules.txt

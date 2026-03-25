@@ -1,0 +1,134 @@
+.ai-how {
+  box-sizing: border-box;
+  padding: clamp(48px, 7vh, 80px) clamp(16px, 5vw, 48px) clamp(52px, 8vh, 88px);
+  background-color: rgb(246, 235, 228);
+  color: #2e353b;
+  font-family: var(--bs-font-sans-serif, "Manrope", system-ui, sans-serif);
+}
+
+.ai-how__inner {
+  width: 100%;
+  max-width: 1220px;
+  margin-inline: auto;
+}
+
+.ai-how__title {
+  margin: 0 0 clamp(40px, 6vw, 56px);
+  text-align: center;
+  font-size: clamp(22px, 2.35vw + 14px, 48px);
+  font-weight: 900;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: #000;
+}
+
+.ai-how__steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 52px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ai-how__step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.ai-how__num {
+  display: block;
+  margin-bottom: clamp(12px, 2vw, 18px);
+  font-size: clamp(44px, 5vw + 1rem, 72px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #2e353b;
+}
+
+.ai-how__step-title {
+  margin: 0px !important;
+  font-size: clamp(16px, 0.5vw + 14px, 20px);
+  font-weight: 700;
+  line-height: 1.3;
+  color: #2e353b;
+}
+
+.ai-how__step-text {
+  margin: 0;
+  font-size: clamp(15px, 0.35vw + 14px, 19px);
+  font-weight: 300;
+  line-height: 1.55;
+  color: #2e353b;
+  max-width: 32ch;
+}
+
+.ai-how__footnote {
+  margin: clamp(40px, 6vw, 50px) 0 0;
+  text-align: right;
+  font-size: clamp(12px, 0.2vw + 11px, 14px);
+  font-weight: 300;
+  line-height: 1.5;
+  margin-left: auto;
+  font-size: 18px;
+  color: #2e353b;
+  width: 70%;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 991px) {
+  .ai-how__steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(28px, 4vw, 40px);
+  }
+
+  .ai-how__step-text {
+    max-width: 40ch;
+  }
+}
+
+@media (max-width: 576px) {
+  .ai-how {
+    padding: clamp(32px, 5vh, 48px) clamp(16px, 4vw, 24px) clamp(48px, 7vh, 64px);
+  }
+
+  .ai-how__steps {
+    grid-template-columns: 1fr;
+    gap: clamp(28px, 4vw, 36px);
+  }
+
+  .ai-how__step-text {
+    max-width: 42ch;
+  }
+
+  .ai-how__footnote {
+    text-align: center;
+    width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .ai-how {
+    padding-inline: 12px;
+  }
+
+  .ai-how__title {
+    font-size: 20px;
+    line-height: 1.14;
+  }
+
+  .ai-how__num {
+    font-size: 40px;
+  }
+
+  .ai-how__step-text {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .ai-how__footnote {
+    font-size: 12px;
+  }
+}

@@ -1,0 +1,15 @@
+.demo-form__phone--invalid {
+  border: 2px solid #ff3b3b !important;
+}
+
+.demo-form__error {
+  margin: 8px 0 0;
+  color: #ff3b3b;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.demo-form__submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
