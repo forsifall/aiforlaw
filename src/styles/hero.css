@@ -213,8 +213,7 @@
   .hero__image {
     width: calc(100% + 40% * (100vw - 1200px) / 720);
     max-width: calc(100% + 40% * (100vw - 1200px) / 720);
-    /* К 1200px сдвигаем влево к тексту (меньше уезжает за правый край), ближе к 1200 — сильнее */
-    transform: translateX(calc((100vw - 1919.98px) * 100 / 719.98));
+    transform: translateX(calc((100vw - 1919.98px) * 280 / 719.98));
   }
 
   .hero__title {
