@@ -200,7 +200,7 @@ body {
 
 @media (max-width: 768px) {
   header {
-    padding: 14px 16px;
+    padding: 18px 16px;
     background-color: rgb(32, 32, 32);
   }
 
@@ -239,7 +239,7 @@ body {
 
 @media (max-width: 360px) {
   header {
-    padding: 12px 12px;
+    padding: 16px 12px;
   }
 
   .site-header__row {
