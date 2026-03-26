@@ -31,6 +31,7 @@
     );
   min-width: 0;
   padding-bottom: 128px;
+  overflow-x: hidden;
 }
 
 .hero__container.container {
@@ -97,13 +98,6 @@
   max-width: 140%;
   aspect-ratio: 670 / 350;
   object-fit: contain;
-}
-
-@media(max-width: 1919px) {
-  .hero__image {
-    width: 100%;
-    max-width: 100%;
-  }
 }
 
 /* форма */
@@ -197,36 +191,65 @@
   color: #fffffe;
 }
 
-/* адаптив */
 
 @media (max-width: 1919.98px) and (min-width: 1200px) {
   .hero {
+    min-height: 90vh;
+    min-height: 90dvh;
     padding-bottom: clamp(40px, 4vw, 68px);
     padding-top: 0px;
+  }
+
+  .hero__main {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero__visual {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero__image {
+    width: calc(100% + 40% * (100vw - 1200px) / 720);
+    max-width: calc(100% + 40% * (100vw - 1200px) / 720);
+    /* К 1200px сдвигаем влево к тексту (меньше уезжает за правый край), ближе к 1200 — сильнее */
+    transform: translateX(calc((100vw - 1919.98px) * 100 / 719.98));
   }
 
   .hero__title {
     margin-top: clamp(48px, 10vw, 124px);
     margin-bottom: clamp(20px, 2.5vw, 34px);
-    font-size: clamp(32px, 2.1vw + 20px, 50px);
-    max-width: 100%;
+    font-size: 50px;
+    line-height: 1.1;
+    max-width: 130%;
+    width: 130%;
   }
 
   .hero__lead {
     margin-bottom: clamp(32px, 5vw, 67px);
-    font-size: clamp(18px, 1.1vw + 14px, 26px);
-    max-width: 100%;
+    font-size: 22px;
+    line-height: 1.3;
+    max-width: 886px;
   }
 
   .hero__hint {
-    font-size: clamp(18px, 1.1vw + 14px, 26px);
-    max-width: 100%;
+    font-size: 22px;
+    line-height: 1.3;
+    max-width: 670px;
   }
 }
 
 @media (max-width: 1199.98px) {
   .hero {
+    min-height: 100vh;
+    min-height: 100dvh;
     padding-bottom: clamp(40px, 5vw, 68px);
+  }
+
+  .hero__image {
+    width: 100%;
+    max-width: 100%;
   }
 
   .hero__visual {
