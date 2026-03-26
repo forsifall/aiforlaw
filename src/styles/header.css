@@ -168,7 +168,7 @@ body {
   }
 }
 
-@media (max-width: 1199.98px) and (min-width: 768px) {
+@media (max-width: 1199.98px) and (min-width: 769px) {
   .site-header__row {
     align-items: center;
   }
@@ -179,10 +179,6 @@ body {
 }
 
 @media (max-width: 991.98px) {
-  header {
-    padding-bottom: max(26px, 2.8vw);
-  }
-
   .site-header__row {
     row-gap: 12px;
     column-gap: 12px;
@@ -198,9 +194,16 @@ body {
   }
 }
 
+@media (max-width: 991.98px) and (min-width: 769px) {
+  header {
+    padding-bottom: max(26px, 2.8vw);
+  }
+}
+
 @media (max-width: 768px) {
   header {
-    padding: 18px 16px;
+    padding-block: 18px;
+    padding-inline: 16px;
     background-color: rgb(32, 32, 32);
   }
 
@@ -239,7 +242,8 @@ body {
 
 @media (max-width: 360px) {
   header {
-    padding: 16px 12px;
+    padding-block: 16px;
+    padding-inline: 12px;
   }
 
   .site-header__row {
