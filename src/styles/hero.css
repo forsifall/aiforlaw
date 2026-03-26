@@ -194,8 +194,7 @@
 
 @media (max-width: 1919.98px) and (min-width: 1200px) {
   .hero {
-    min-height: 90vh;
-    min-height: 90dvh;
+    min-height: var(--hero-fold-min-height, calc(90svh - var(--header-current-height, 0px)));
     padding-bottom: clamp(40px, 4vw, 68px);
     padding-top: 0px;
   }
@@ -241,8 +240,7 @@
 
 @media (max-width: 1199.98px) {
   .hero {
-    min-height: 100vh;
-    min-height: 100dvh;
+    min-height: var(--hero-fold-min-height, calc(100svh - var(--header-current-height, 0px)));
     padding-bottom: clamp(40px, 5vw, 68px);
   }
 

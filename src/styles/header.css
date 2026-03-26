@@ -25,9 +25,9 @@ header {
 }
 
 body {
-  /* Резерв места под фиксированную шапку; обновляется JS при изменении её высоты */
   padding-top: var(--header-current-height, 0px);
   transition: padding-top 450ms ease;
+  overflow-anchor: none;
 }
 
 .site-header__row {
@@ -36,7 +36,6 @@ body {
 
 
 
-/* cекция телефон  */
 .site-header__phone {
   margin: 0;
   min-width: 0;
@@ -54,7 +53,6 @@ body {
   text-decoration: underline;
 }
 
-/* секция общие кнопки в шапке */
 .site-header__btn {
   box-sizing: border-box;
   display: inline-flex;
@@ -71,7 +69,6 @@ body {
     box-shadow 0.4s ease;
 }
 
-/* секция скачать презентацию */
 .site-header__btn--download {
   width: 208px;
   height: 40px;
@@ -89,7 +86,6 @@ body {
   background-color: rgba(162, 56, 255, 0.15);
 }
 
-/* секция получить консультацию  */
 .site-header__btn--consult {
   width: 262px;
   height: 40px;

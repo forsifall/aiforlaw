@@ -18,9 +18,34 @@ if (!header) {
     header.style.paddingBottom = "";
   }
 
+  function syncHeroFold(headerHeightPx) {
+    const hero = document.querySelector("#hero-section");
+    if (!hero) return;
+    const vv = window.visualViewport;
+    const viewportH = Math.round(vv ? vv.height : window.innerHeight);
+    const headerH =
+      typeof headerHeightPx === "number"
+        ? Math.max(0, Math.round(headerHeightPx))
+        : Math.max(0, Math.round(header.getBoundingClientRect().height));
+
+    let foldPx = null;
+    if (window.matchMedia("(max-width: 1919.98px) and (min-width: 1200px)").matches) {
+      foldPx = Math.max(0, Math.round(0.9 * viewportH) - headerH);
+    } else if (window.matchMedia("(max-width: 1199.98px)").matches) {
+      foldPx = Math.max(0, viewportH - headerH);
+    }
+
+    if (foldPx === null) {
+      document.documentElement.style.removeProperty("--hero-fold-min-height");
+    } else {
+      document.documentElement.style.setProperty("--hero-fold-min-height", `${foldPx}px`);
+    }
+  }
+
   function syncBodyPaddingFromHeader() {
     const h = Math.max(0, Math.round(header.getBoundingClientRect().height));
     document.documentElement.style.setProperty("--header-current-height", `${h}px`);
+    syncHeroFold(h);
   }
 
   function setHeaderHeight(px) {
@@ -100,6 +125,12 @@ if (!header) {
       if (!hidden) return;
       hidden = false;
       applyExpandedLayout();
+      requestAnimationFrame(() => {
+        if ((window.scrollY || 0) <= 8) {
+          window.scrollTo(0, 0);
+        }
+        syncBodyPaddingFromHeader();
+      });
     }
 
     function hide() {
@@ -125,6 +156,38 @@ if (!header) {
             applyExpandedLayout();
           }
         }, RESIZE_DEBOUNCE_MS);
+      },
+      { passive: true },
+    );
+
+    const vv = window.visualViewport;
+    if (vv) {
+      vv.addEventListener("resize", syncBodyPaddingFromHeader, { passive: true });
+      vv.addEventListener("scroll", syncBodyPaddingFromHeader, { passive: true });
+    }
+
+    let headerRoTick = false;
+    const headerResizeObserver = new ResizeObserver(() => {
+      if (headerRoTick) return;
+      headerRoTick = true;
+      requestAnimationFrame(() => {
+        headerRoTick = false;
+        syncBodyPaddingFromHeader();
+      });
+    });
+    headerResizeObserver.observe(header);
+
+    header.addEventListener(
+      "transitionend",
+      (e) => {
+        if (e.target !== header) return;
+        if (
+          e.propertyName === "height" ||
+          e.propertyName === "padding-top" ||
+          e.propertyName === "padding-bottom"
+        ) {
+          syncBodyPaddingFromHeader();
+        }
       },
       { passive: true },
     );
