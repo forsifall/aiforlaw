@@ -309,6 +309,9 @@
 
 @media (max-width: 576px) {
  
+  .container_hero-title {
+    margin-top: 33px !important;
+  }
 
   .demo-form__actions {
     text-align: center;
