@@ -5,7 +5,7 @@
   padding: clamp(56px, 9vh, 100px) clamp(16px, 5vw, 48px) clamp(64px, 10vh, 112px);
   background-color: #0a0a0a;
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.78)),
+    linear-gradient(rgba(0, 0, 0, 0.861), rgba(0, 0, 0,0.861)),
     url("../assets/images/деловой.avif");
   background-size: cover;
   background-position: center;

@@ -52,7 +52,7 @@
 }
 
 .pricing__card--featured {
-  background: linear-gradient(165deg, #5b2d8c 0%, #4a1f78 45%, #3d1a62 100%);
+  background-color: rgb(53, 36, 68);
   border-color: rgba(255, 255, 255, 0.12);
   box-shadow:
     0 12px 40px rgba(80, 40, 140, 0.35),
@@ -62,6 +62,7 @@
 .pricing__card-head {
   margin: 0 0 clamp(16px, 2.5vw, 22px);
   text-align: center;
+  background-color: transparent;
 }
 
 .pricing__card-name {

@@ -16,6 +16,7 @@
 .business-problems__intro {
   margin: 0 0 clamp(56px, 8vw, 80px);
   background-color: transparent !important;
+  padding: 0px;
 }
 
 .business-problems__title {

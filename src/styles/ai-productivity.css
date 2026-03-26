@@ -15,6 +15,7 @@
 
 .ai-productivity__header {
   margin: 0 0 clamp(32px, 5vw, 44px);
+  padding-left: 0px;
 }
 
 .ai-productivity__title {
