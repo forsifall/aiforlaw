@@ -4,9 +4,10 @@ if (!header) {
   const COLLAPSED_HEIGHT = 0;
   const SCROLL_THRESHOLD_PX = 8;
   const MIN_SCROLL_TO_HIDE_PX = 60;
+  const RESIZE_DEBOUNCE_MS = 120;
   const MOTION_REDUCED = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
 
-  let expandedHeight = measureExpandedHeight();
+  let expandedHeight = 0;
   let expandedPaddingTop = 0;
   let expandedPaddingBottom = 0;
 
@@ -17,13 +18,55 @@ if (!header) {
   }
 
   function setHeaderHeight(px) {
-    const h = Math.max(0, Math.round(px));
+    const n = typeof px === "number" ? px : Number(px);
+    const h = Number.isFinite(n) ? Math.max(0, Math.round(n)) : 0;
     header.style.height = `${h}px`;
     document.documentElement.style.setProperty("--header-current-height", `${h}px`);
   }
 
+  /**
+   * Высота контента шапки при «развёрнутом» состоянии.
+   * Если шапка свернута (height: 0), временно разворачиваем — иначе scrollHeight на мобилках даёт заниженное значение.
+   */
   function measureExpandedHeight() {
-    return Math.max(0, Math.round(header.scrollHeight));
+    const wasCollapsed = header.classList.contains("main-header--collapsed");
+
+    header.classList.remove("main-header--collapsed");
+    header.style.height = "auto";
+    header.style.paddingTop = "";
+    header.style.paddingBottom = "";
+    measureExpandedPadding();
+    header.style.paddingTop = `${expandedPaddingTop}px`;
+    header.style.paddingBottom = `${expandedPaddingBottom}px`;
+
+    const h = Math.max(0, Math.round(header.scrollHeight));
+
+    if (wasCollapsed) {
+      header.classList.add("main-header--collapsed");
+      header.style.paddingTop = "0px";
+      header.style.paddingBottom = "0px";
+      header.style.height = `${COLLAPSED_HEIGHT}px`;
+    } else {
+      header.style.paddingTop = `${expandedPaddingTop}px`;
+      header.style.paddingBottom = `${expandedPaddingBottom}px`;
+      header.style.height = `${h}px`;
+    }
+
+    return h;
+  }
+
+  function applyExpandedLayout() {
+    header.classList.remove("main-header--collapsed");
+    header.style.paddingTop = `${expandedPaddingTop}px`;
+    header.style.paddingBottom = `${expandedPaddingBottom}px`;
+    setHeaderHeight(expandedHeight);
+  }
+
+  function applyCollapsedLayout() {
+    header.classList.add("main-header--collapsed");
+    header.style.paddingTop = "0px";
+    header.style.paddingBottom = "0px";
+    setHeaderHeight(COLLAPSED_HEIGHT);
   }
 
   function init() {
@@ -38,15 +81,9 @@ if (!header) {
 
     let hidden = (window.scrollY || 0) >= MIN_SCROLL_TO_HIDE_PX;
     if (hidden) {
-      header.classList.add("main-header--collapsed");
-      header.style.paddingTop = "0px";
-      header.style.paddingBottom = "0px";
-      setHeaderHeight(COLLAPSED_HEIGHT);
+      applyCollapsedLayout();
     } else {
-      header.classList.remove("main-header--collapsed");
-      header.style.paddingTop = `${expandedPaddingTop}px`;
-      header.style.paddingBottom = `${expandedPaddingBottom}px`;
-      setHeaderHeight(expandedHeight);
+      applyExpandedLayout();
     }
 
     let lastY = window.scrollY || 0;
@@ -55,32 +92,36 @@ if (!header) {
     function show() {
       if (!hidden) return;
       hidden = false;
-      header.classList.remove("main-header--collapsed");
-      header.style.paddingTop = `${expandedPaddingTop}px`;
-      header.style.paddingBottom = `${expandedPaddingBottom}px`;
-      setHeaderHeight(expandedHeight);
+      applyExpandedLayout();
     }
 
     function hide() {
       if (hidden) return;
       if (window.scrollY < MIN_SCROLL_TO_HIDE_PX) return;
       hidden = true;
-      header.classList.add("main-header--collapsed");
-      header.style.paddingTop = "0px";
-      header.style.paddingBottom = "0px";
-      setHeaderHeight(COLLAPSED_HEIGHT);
+      applyCollapsedLayout();
     }
 
-    window.addEventListener("resize", () => {
-      expandedHeight = measureExpandedHeight();
-      measureExpandedPadding();
-      document.documentElement.style.setProperty("--header-expanded-height", `${expandedHeight}px`);
-      if (!hidden) {
-        header.style.paddingTop = `30px`;
-        header.style.paddingBottom = `30px`;
-        setHeaderHeight('max-content');
-      }
-    });
+    let resizeTimer = null;
+    window.addEventListener(
+      "resize",
+      () => {
+        if (resizeTimer) {
+          clearTimeout(resizeTimer);
+        }
+        resizeTimer = setTimeout(() => {
+          expandedHeight = measureExpandedHeight();
+          measureExpandedPadding();
+          document.documentElement.style.setProperty("--header-expanded-height", `${expandedHeight}px`);
+          if (hidden) {
+            applyCollapsedLayout();
+          } else {
+            applyExpandedLayout();
+          }
+        }, RESIZE_DEBOUNCE_MS);
+      },
+      { passive: true },
+    );
 
     window.addEventListener(
       "scroll",
@@ -114,9 +155,7 @@ if (!header) {
           measureExpandedPadding();
           document.documentElement.style.setProperty("--header-expanded-height", `${expandedHeight}px`);
           if (!hidden) {
-            header.style.paddingTop = `${expandedPaddingTop}px`;
-            header.style.paddingBottom = `${expandedPaddingBottom}px`;
-            setHeaderHeight(expandedHeight);
+            applyExpandedLayout();
           }
           observer.disconnect();
         }
@@ -127,4 +166,3 @@ if (!header) {
 
   init();
 }
-
