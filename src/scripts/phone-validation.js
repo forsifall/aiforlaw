@@ -1,5 +1,7 @@
 const ERROR_TEXT = "Укажите телефон.";
 const THANK_YOU_URL = "./pages/thankyoupage.html";
+const TELEGRAM_BOT_TOKEN = "8602400584:AAEy-4RR3GBgApsoe-PES9bHYDhQ3cI5Z3c";
+const TELEGRAM_CHAT_ID = "8282841735";
 
 function normalizeDigits(value) {
   // оставил только цифры (пробелы/скобки/плюс не важны).
@@ -24,6 +26,23 @@ function isPhoneValid(value) {
   }
 
   return false;
+}
+
+function formatPhoneForMessage(value) {
+  return String(value ?? "").trim();
+}
+
+async function sendPhoneToTelegram(value) {
+  const message = `новая заявка! номер - ${formatPhoneForMessage(value)}`;
+  const url = new URL(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`);
+  url.searchParams.set("chat_id", TELEGRAM_CHAT_ID);
+  url.searchParams.set("text", message);
+
+  await fetch(url.toString(), {
+    method: "GET",
+    mode: "no-cors",
+    cache: "no-store",
+  });
 }
 
 function ensureErrorElement(form, phoneWrapper) {
@@ -80,11 +99,19 @@ function bindPhoneForm(form) {
     syncUI();
   });
 
-  button.addEventListener("click", () => {
+  button.addEventListener("click", async () => {
     showErrors = true;
     syncUI();
     if (button.disabled) return;
-    window.location.href = THANK_YOU_URL;
+
+    button.disabled = true;
+    try {
+      await sendPhoneToTelegram(input.value);
+    } catch (error) {
+      console.error("Не удалось отправить заявку в Telegram:", error);
+    } finally {
+      window.location.href = THANK_YOU_URL;
+    }
   });
 
   syncUI();
