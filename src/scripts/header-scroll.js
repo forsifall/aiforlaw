@@ -9,36 +9,48 @@ if (!header) {
 
   let expandedHeight = 0;
 
+  function isMobileHeader() {
+    return window.matchMedia("(max-width: 768px)").matches;
+  }
+
   function clearInlinePadding() {
     header.style.paddingTop = "";
     header.style.paddingBottom = "";
+  }
+
+  function syncBodyPaddingFromHeader() {
+    const h = Math.max(0, Math.round(header.getBoundingClientRect().height));
+    document.documentElement.style.setProperty("--header-current-height", `${h}px`);
   }
 
   function setHeaderHeight(px) {
     const n = typeof px === "number" ? px : Number(px);
     const h = Number.isFinite(n) ? Math.max(0, Math.round(n)) : 0;
     header.style.height = `${h}px`;
-    document.documentElement.style.setProperty("--header-current-height", `${h}px`);
+    syncBodyPaddingFromHeader();
   }
 
   function measureExpandedHeight() {
     const wasCollapsed = header.classList.contains("main-header--collapsed");
 
     header.classList.remove("main-header--collapsed");
-    header.style.height = "auto";
     clearInlinePadding();
+    header.style.height = "auto";
+    if (isMobileHeader()) {
+      header.style.removeProperty("height");
+    }
 
-    const h = Math.max(0, Math.round(header.scrollHeight));
+    const h = Math.max(0, Math.round(header.offsetHeight));
 
     if (wasCollapsed) {
-      header.classList.add("main-header--collapsed");
-      header.style.paddingTop = "0px";
-      header.style.paddingBottom = "0px";
-      header.style.height = `${COLLAPSED_HEIGHT}px`;
+      applyCollapsedLayout();
     } else {
-      header.style.paddingTop = "";
-      header.style.paddingBottom = "";
-      header.style.height = `${h}px`;
+      if (isMobileHeader()) {
+        header.style.removeProperty("height");
+      } else {
+        header.style.height = `${h}px`;
+      }
+      syncBodyPaddingFromHeader();
     }
 
     return h;
@@ -46,9 +58,18 @@ if (!header) {
 
   function applyExpandedLayout() {
     header.classList.remove("main-header--collapsed");
-    header.style.paddingTop = "";
-    header.style.paddingBottom = "";
-    setHeaderHeight(expandedHeight);
+    clearInlinePadding();
+    if (isMobileHeader()) {
+      header.style.removeProperty("height");
+      requestAnimationFrame(() => {
+        expandedHeight = header.offsetHeight;
+        document.documentElement.style.setProperty("--header-expanded-height", `${expandedHeight}px`);
+        syncBodyPaddingFromHeader();
+      });
+    } else {
+      header.style.height = `${expandedHeight}px`;
+      syncBodyPaddingFromHeader();
+    }
   }
 
   function applyCollapsedLayout() {
@@ -70,8 +91,6 @@ if (!header) {
     let hidden = (window.scrollY || 0) >= MIN_SCROLL_TO_HIDE_PX;
     if (hidden) {
       applyCollapsedLayout();
-    } else {
-      applyExpandedLayout();
     }
 
     let lastY = window.scrollY || 0;
@@ -80,11 +99,6 @@ if (!header) {
     function show() {
       if (!hidden) return;
       hidden = false;
-      header.classList.remove("main-header--collapsed");
-      clearInlinePadding();
-      header.style.height = "auto";
-      expandedHeight = Math.max(0, Math.round(header.scrollHeight));
-      document.documentElement.style.setProperty("--header-expanded-height", `${expandedHeight}px`);
       applyExpandedLayout();
     }
 
