@@ -284,17 +284,17 @@
   .hero__title {
     margin-top: clamp(0px, 10vw, 0px) !important;
     margin-bottom: clamp(12px, 3vw, 20px);
-    font-size: clamp(22px, 5.5vw + 8px, 34px);
+    font-size: clamp(20px, 5.5vw + 8px, 34px);
     line-height: 1.08;
   }
 
   .hero__lead {
     margin-bottom: clamp(20px, 5vw, 32px);
-    font-size: clamp(16px, 3.5vw + 6px, 22px);
+    font-size: clamp(15px, 3.5vw + 6px, 22px);
   }
 
   .hero__hint {
-    font-size: clamp(16px, 3.5vw + 6px, 22px);
+    font-size: clamp(15px, 3.5vw + 6px, 22px);
   }
 
   .demo-form {
