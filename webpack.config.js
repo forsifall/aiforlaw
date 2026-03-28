@@ -2,6 +2,88 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+
+/** @param {string} name */
+function assetSourceToString(source) {
+  if (typeof source === "string") return source;
+  const s = source && typeof source.source === "function" ? source.source() : source;
+  if (Buffer.isBuffer(s)) return s.toString("utf8");
+  return String(s ?? "");
+}
+
+class CriticalCssInlineAndDeferPlugin {
+  /**
+   * @param {{ isProd: boolean }} opts
+   */
+  constructor(opts) {
+    this.isProd = opts.isProd;
+  }
+
+  /** @param {import("webpack").Compiler} compiler */
+  apply(compiler) {
+    compiler.hooks.compilation.tap("CriticalCssInlineAndDeferPlugin", (compilation) => {
+      const hooks = HtmlWebpackPlugin.getHooks(compilation);
+      hooks.beforeEmit.tapAsync("CriticalCssInlineAndDeferPlugin", (data, cb) => {
+        try {
+          let html = data.html;
+          let criticalCss = "";
+
+          for (const { name, source } of compilation.getAssets()) {
+            if (/^css\/critical\.[a-f0-9]+\.css$/i.test(name) || name === "css/critical.css") {
+              criticalCss = assetSourceToString(source);
+              break;
+            }
+          }
+
+          if (criticalCss) {
+            criticalCss = criticalCss.replace(
+              /\/\*# sourceMappingURL=[^*]+\*\/\s*$/i,
+              ""
+            );
+            criticalCss = criticalCss.replace(
+              /url\(\.\.\/assets\//g,
+              "url(assets/"
+            );
+            if (html.includes("</title>")) {
+              html = html.replace("</title>", `</title><style>${criticalCss}</style>`);
+            } else {
+              html = html.replace("</head>", `<style>${criticalCss}</style></head>`);
+            }
+          }
+
+          if (data.outputName === "index.html") {
+            html = html.replace(
+              /<link\s+[^>]*(?:href="(css\/index\.[^"]+\.css)"[^>]*rel="stylesheet"|rel="stylesheet"[^>]*href="(css\/index\.[^"]+\.css)")[^>]*\/?>/gi,
+              (_, href1, href2) => {
+                const href = href1 || href2;
+                return `<link rel="preload" href="${href}" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="${href}"></noscript>`;
+              }
+            );
+          }
+
+          data.html = html;
+
+          if (this.isProd && data.outputName === "index.html") {
+            for (const { name } of compilation.getAssets()) {
+              if (
+                /^css\/critical\.[a-f0-9]+\.css$/i.test(name) ||
+                /^js\/critical\.[a-f0-9]+\.js$/i.test(name) ||
+                /^js\/critical\.[a-f0-9]+\.js\.map$/i.test(name)
+              ) {
+                compilation.deleteAsset(name);
+              }
+            }
+          }
+
+          cb(null, data);
+        } catch (e) {
+          cb(e);
+        }
+      });
+    });
+  }
+}
+
 /** @param {unknown} _env @param {{ mode?: string }} argv */
 module.exports = (_env, argv) => {
   const isProd = argv.mode === "production";
@@ -9,6 +91,7 @@ module.exports = (_env, argv) => {
   return {
     context: __dirname,
     entry: {
+      critical: "./src/critical.js",
       index: "./src/main.js",
       thankyou: "./src/thankyou-main.js",
     },
@@ -40,6 +123,7 @@ module.exports = (_env, argv) => {
       new MiniCssExtractPlugin({
         filename: isProd ? "css/[name].[contenthash:8].css" : "css/[name].css",
       }),
+      new CriticalCssInlineAndDeferPlugin({ isProd }),
       new HtmlWebpackPlugin({
         template: "./src/index.html",
         filename: "index.html",
