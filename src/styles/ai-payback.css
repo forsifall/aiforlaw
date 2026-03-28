@@ -23,7 +23,7 @@
   background-position: center;
   background-repeat: no-repeat;
   color: #fff;
-  font-family: var(--bs-font-sans-serif, "Manrope", system-ui, sans-serif);
+  font-family: var(--font-sans);
 }
 
 .ai-payback__inner {

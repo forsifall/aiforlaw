@@ -22,7 +22,7 @@
   background-size: cover;
   background-position: right bottom;
   color: #ffffff;
-  font-family: var(--bs-font-sans-serif, "Manrope", system-ui, sans-serif);
+  font-family: var(--font-sans);
   text-align: left;
 }
 

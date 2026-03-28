@@ -20,7 +20,10 @@ if (!header) {
 
   function syncHeroFold(headerHeightPx) {
     const hero = document.querySelector("#hero-section");
-    if (!hero) return;
+    if (!hero) {
+      document.documentElement.style.removeProperty("--hero-fold-min-height");
+      return;
+    }
     const vv = window.visualViewport;
     const viewportH = Math.round(vv ? vv.height : window.innerHeight);
     const headerH =
@@ -29,16 +32,21 @@ if (!header) {
         : Math.max(0, Math.round(header.getBoundingClientRect().height));
 
     let foldPx = null;
-    if (window.matchMedia("(max-width: 1919.98px) and (min-width: 1200px)").matches) {
-      foldPx = Math.max(0, Math.round(0.9 * viewportH) - headerH);
-    } else if (window.matchMedia("(max-width: 1199.98px)").matches) {
+    if (window.matchMedia("(max-width: 1199.98px)").matches) {
+      foldPx = Math.max(0, viewportH - headerH);
+    } else if (window.matchMedia("(min-width: 1200px)").matches) {
       foldPx = Math.max(0, viewportH - headerH);
     }
 
     if (foldPx === null) {
       document.documentElement.style.removeProperty("--hero-fold-min-height");
     } else {
-      document.documentElement.style.setProperty("--hero-fold-min-height", `${foldPx}px`);
+      /* 0px ломает min-height в CSS (валидное значение, без fallback) — не записываем */
+      if (foldPx > 0) {
+        document.documentElement.style.setProperty("--hero-fold-min-height", `${foldPx}px`);
+      } else {
+        document.documentElement.style.removeProperty("--hero-fold-min-height");
+      }
     }
   }
 
@@ -230,6 +238,10 @@ if (!header) {
       });
       observer.observe(header, { childList: true, subtree: true });
     }
+
+    requestAnimationFrame(() => {
+      syncBodyPaddingFromHeader();
+    });
   }
 
   init();

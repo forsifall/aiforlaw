@@ -55,9 +55,9 @@
 }
 
 :root {
-  --bs-font-sans-serif: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 html {
-  font-family: var(--bs-font-sans-serif);
+  font-family: var(--font-sans);
 }

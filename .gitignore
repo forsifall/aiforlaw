@@ -1,31 +1,30 @@
-# Dependencies
-node_modules/
+# В корне репозитория в Git попадают только:
+#   package.json, package-lock.json, webpack.config.js, .gitignore, папка src/
+# Всё остальное в корне — нет (copy_assets, css_html_helper, архивы и т.д.)
 
-# Webpack / сборка
+/*
+!/.gitignore
+!/package.json
+!/package-lock.json
+!/webpack.config.js
+!/src/
+!/src/**
+
+node_modules/
 dist/
 
-# Logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
+# Явно (дублирует логику /*, но понятно что это не часть проекта)
+copy_assets/
+css_html_helper/
 
-# Environment
-.env
-.env.*.local
+*.zip
 
-# OS
-.DS_Store
-Thumbs.db
-
-# IDE / редактор
-.idea/
-*.swp
-*.swo
-
-# Локальные заметки (по желанию)
 cursor_rules.txt
 
-# Выгрузки / зеркала сайта (не часть сборки)
-copy_assets/
+# Логи / окружение / мусор
+*.log
+.env
+.env.*.local
+.DS_Store
+Thumbs.db
+.idea/

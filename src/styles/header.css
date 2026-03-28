@@ -31,10 +31,11 @@ body {
 }
 
 .site-header__row {
+  display: flex;
   align-items: center;
+  justify-content: flex-end;
+  gap: 1.5rem;
 }
-
-
 
 .site-header__phone {
   margin: 0;
@@ -43,7 +44,7 @@ body {
 }
 
 .site-header__phone-link {
-  font: normal normal normal 16px/1.4em var(--bs-font-sans-serif);
+  font: normal normal normal 16px/1.4em var(--font-sans);
   color: rgb(255, 255, 255);
   text-decoration: none;
   white-space: nowrap;
@@ -75,7 +76,7 @@ body {
   padding: 0 12px;
   border-radius: 5px;
   border: 0 solid transparent;
-  font: normal normal normal 17px/1.4em var(--bs-font-sans-serif);
+  font: normal normal normal 17px/1.4em var(--font-sans);
   color: rgb(255, 255, 254);
   background-color: transparent;
   box-shadow: none;
@@ -92,7 +93,7 @@ body {
   padding: 0 12px;
   border-radius: 50px;
   border: 0 solid transparent;
-  font: normal normal normal 17px/1.4em var(--bs-font-sans-serif);
+  font: normal normal normal 17px/1.4em var(--font-sans);
   color: rgb(255, 255, 255);
   background-color: rgba(162, 56, 255, 0.26);
   box-shadow: 0 1px 20px 0 rgba(108, 37, 170, 1);
@@ -126,7 +127,9 @@ body {
 }
 
 /* ориентир ширины контента шапки; на широких экранах не разъезжается */
-.main-header .container {
+.main-header .site-header__inner {
+  box-sizing: border-box;
+  width: 100%;
   max-width: 1440px;
   margin-left: auto;
   margin-right: auto;

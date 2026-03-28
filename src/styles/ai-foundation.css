@@ -5,7 +5,7 @@
   background-color: rgb(32,32,32);
   border-bottom: 1px solid #2c2c2c;
   color: #fff;
-  font-family: var(--bs-font-sans-serif, "Manrope", system-ui, sans-serif);
+  font-family: var(--font-sans);
   overflow: hidden;
 }
 

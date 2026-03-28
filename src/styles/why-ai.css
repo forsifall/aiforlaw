@@ -7,7 +7,7 @@
   padding: clamp(32px, 6vh, 72px) clamp(16px, 5vw, 48px);
   background-color: rgb(246, 235, 228);
   color: #2e353b;
-  font-family: var(--bs-font-sans-serif, "Manrope", system-ui, sans-serif);
+  font-family: var(--font-sans);
 }
 
 .why-ai__inner {

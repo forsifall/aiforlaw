@@ -3,7 +3,7 @@
   padding: clamp(56px, 9vh, 100px) clamp(16px, 5vw, 48px) clamp(64px, 10vh, 112px);
   background-color: rgb(32, 32, 32);
   color: #fff;
-  font-family: var(--bs-font-sans-serif, "Manrope", system-ui, sans-serif);
+  font-family: var(--font-sans);
   text-align: left;
 }
 
