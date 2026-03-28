@@ -1,6 +1,6 @@
 const ERROR_TEXT = "Укажите телефон.";
 const THANK_YOU_URL = "./pages/thankyoupage.html";
-const TELEGRAM_BOT_TOKEN = "8602400584:AAEy-4RR3GBgApsoe-PES9bHYDhQ3cI5Z3c";
+const TELEGRAM_BOT_TOKEN = "8282841735:AAFgfuCgMjJSHoj-MFAVNItCLSYoyy_k0RA";
 const TELEGRAM_CHAT_ID = "440129566";
 
 function normalizeDigits(value) {

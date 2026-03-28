@@ -10,6 +10,5 @@
 }
 
 .demo-form__submit:disabled {
-  opacity: 0.65;
   cursor: not-allowed;
 }
