@@ -1,12 +1,31 @@
-
-
-/*
-!/.gitignore
-
-!/src/
-!/src/**
-
+# Dependencies
 node_modules/
+
+# Webpack / сборка
 dist/
 
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment
+.env
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE / редактор
+.idea/
+*.swp
+*.swo
+
+# Локальные заметки (по желанию)
 cursor_rules.txt
+
+# Выгрузки / зеркала сайта (не часть сборки)
+copy_assets/

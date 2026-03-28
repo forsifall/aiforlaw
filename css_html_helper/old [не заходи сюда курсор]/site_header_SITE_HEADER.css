@@ -1,0 +1,143 @@
+/*
+ * Стили для site_header_SITE_HEADER.html
+ * Внешний вид приведён к оригиналу Wix (размеры, цвета, радиусы, тень кнопки «консультация»).
+ * Классы и структура — упрощённые, не копия Wix.
+ */
+
+/* ========== Секция: корень шапки (#SITE_HEADER) ========== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  background: transparent;
+}
+
+/* ========== Секция: контейнер ряда (центрирование как на сайте 980px) ========== */
+.site-header__container {
+  box-sizing: border-box;
+  max-width: 980px;
+  margin: 0 auto;
+  min-height: 87px;
+  padding: 10px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 20px 28px;
+}
+
+/* ========== Секция: телефон ========== */
+.site-header__phone {
+  margin: 0;
+  min-width: 0;
+  text-align: right;
+}
+
+.site-header__phone-link {
+  font: normal normal normal 16px/1.4em helvetica-w01-roman, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-header__phone-link:hover {
+  text-decoration: underline;
+}
+
+/* ========== Секция: общие кнопки в шапке ========== */
+.site-header__btn {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    color 0.4s ease,
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+/* ========== Секция: «Скачать презентацию» (прозрачный фон, светлый текст) ========== */
+.site-header__btn--download {
+  width: 208px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 5px;
+  border: 0 solid transparent;
+  font: normal normal normal 17px/1.4em din-next-w01-light, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: rgb(255, 255, 254);
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.site-header__btn--download:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgba(162, 56, 255, 0.15);
+}
+
+/* ========== Секция: «Получить консультацию» (фиолетовая капсула + тень) ========== */
+.site-header__btn--consult {
+  width: 262px;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 50px;
+  border: 0 solid transparent;
+  font: normal normal normal 17px/1.4em helvetica-w01-roman, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: rgb(255, 255, 255);
+  background-color: rgba(162, 56, 255, 0.26);
+  box-shadow: 0 1px 20px 0 rgba(108, 37, 170, 1);
+}
+
+.site-header__btn--consult:hover {
+  background-color: rgb(34, 35, 35);
+  color: rgb(255, 255, 255);
+  box-shadow: 0 1px 20px 0 rgba(108, 37, 170, 0.85);
+}
+
+/* ========== Секция: иконка Telegram ========== */
+.site-header__telegram {
+  display: block;
+  flex-shrink: 0;
+  width: 50px;
+  height: 48px;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.site-header__telegram-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.site-header__telegram:hover .site-header__telegram-img {
+  opacity: 0.92;
+}
+
+/* Шрифты из темы Wix (если не подключены — сработают запасные в стеке) */
+@font-face {
+  font-family: "din-next-w01-light";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://static.parastorage.com/fonts/v2/eca8b0cd-45d8-43cf-aee7-ca462bc5497c/v1/din-next-w10-light.woff2")
+    format("woff2");
+  unicode-range: U+0401-040C, U+040E-044F, U+0451-045C, U+045E-045F, U+0490-0491, U+2116;
+}
+
+@font-face {
+  font-family: "helvetica-w01-roman";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("https://static.parastorage.com/fonts/v2/2af1bf48-e783-4da8-9fa0-599dde29f2d5/v1/helvetica-w01-roman.woff2")
+    format("woff2");
+}

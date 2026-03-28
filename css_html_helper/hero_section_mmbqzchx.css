@@ -1,0 +1,238 @@
+/* -------------------------------------------------------------------------- */
+/* Базовая страница (демо-фрагмент)                                           */
+/* -------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Секция-герой — контейнер с градиентом (источник: #comp-mmbqzchx)           */
+/* -------------------------------------------------------------------------- */
+
+.hero {
+  /* Те же радиальные слои, что в --bg-gradient у #comp-mmbqzchx */
+  background-color: #000;
+  background-image:
+    radial-gradient(
+      circle at 83.33333333333334% 13.333333333333334%,
+      rgba(25, 19, 220, 0.39) 0%,
+      12.354%,
+      rgba(25, 19, 220, 0) 29%
+    ),
+    radial-gradient(
+      circle at 88.33333333333333% 84.16666666666667%,
+      rgba(125, 43, 196, 0.57) 0%,
+      29.868000000000002%,
+      rgba(125, 43, 196, 0) 57%
+    ),
+    radial-gradient(
+      circle at 11.1865234375% 29.94140625%,
+      #3b2144 0%,
+      35%,
+      rgba(59, 33, 68, 0) 50%
+    ),
+    radial-gradient(
+      circle at 48.9013671875% 49.521484375%,
+      rgba(0, 0, 0, 0) 0%,
+      100%,
+      rgba(0, 0, 0, 0) 100%
+    );
+  min-width: 980px;
+  padding-bottom: 68px; /* нижний отступ ряда comp-mmbqzcid до следующей секции */
+}
+
+/* Внутренняя оболочка по ширине контентной сетки ~980px */
+.hero__shell {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+/* Две колонки 653px + 327px (как --column-width у comp-mmbqzcio / comp-mmbqzcii4) */
+.hero__row {
+  display: grid;
+  grid-template-columns: 653px 327px;
+  align-items: start;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Левая колонка: типографика                                                 */
+/* -------------------------------------------------------------------------- */
+
+.hero__column--main {
+  width: 653px;
+  max-width: 100%;
+  /* min-height сетки контента в оригинале ~868px — задаём через картинку справа */
+}
+
+/* Заголовок: helvetica bold, 50px, плотная межстрочность */
+.hero__title {
+  margin: 124px 0 34px;
+  max-width: 916px;
+  color: #fff;
+  font-family: "helvetica-w01-bold", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 0.7;
+}
+
+/* Основной абзац под заголовком */
+.hero__lead {
+  margin: 0 0 67px;
+  max-width: 826px;
+  color: #fff;
+  font-family: "din-next-w01-light", "DIN Alternate", Arial, sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* Тексты перед формой */
+.hero__hint {
+  margin: 0 0 1px;
+  max-width: 670px;
+  color: #fff;
+  font-family: "din-next-w01-light", "DIN Alternate", Arial, sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.hero__hint--tight {
+  margin-bottom: 0;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Форма демо-доступа (цвета из .comp-mkktjoba в compCssMappers)              */
+/* -------------------------------------------------------------------------- */
+
+.demo-form {
+  margin: 0 0 10px;
+  width: 337px;
+  max-width: 100%;
+  border: none;
+  padding: 0;
+}
+
+.demo-form__field {
+  margin-bottom: 14px; /* --rowSpacing */
+}
+
+/* Контейнер телефона: полупрозрачный фон, светлая обводка */
+.demo-form__phone {
+  display: flex;
+  align-items: stretch;
+  min-height: 48px;
+  padding: 0 12px 0 10px;
+  border-radius: 8px; /* --inputBorderRadius */
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background-color: rgba(0, 0, 0, 0.16);
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+}
+
+.demo-form__phone:hover {
+  border-color: rgba(255, 255, 255, 0.81);
+  background-color: rgba(0, 0, 0, 0.41);
+}
+
+.demo-form__phone-prefix {
+  display: flex;
+  align-items: center;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.demo-form__flag {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 22px;
+}
+
+.demo-form__input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  color: rgb(250, 250, 250);
+  font-family: "helvetica-w01-roman", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  outline: none;
+}
+
+.demo-form__input::placeholder {
+  color: rgb(250, 250, 250);
+}
+
+/* Подпись под инпутом */
+.demo-form__note {
+  margin: 8px 0 0;
+  color: rgb(250, 250, 250);
+  font-family: "helvetica-w01-roman", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Кнопка «Получить доступ» — капсула, кремовый фон, чёрный текст             */
+/* -------------------------------------------------------------------------- */
+
+.demo-form__actions {
+  margin-top: 14px;
+}
+
+.demo-form__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 999px; /* --submitButtonBorderRadius: 100 (капсула) */
+  background-color: rgba(246, 235, 228, 0.97);
+  color: #000;
+  font-family: "helvetica-w01-roman", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.demo-form__submit:hover {
+  background-color: rgba(162, 56, 255, 0.54);
+  color: #fffffe;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Правая колонка: изображение 670×350, сдвиг влево (mesh: left -343px)       */
+/* -------------------------------------------------------------------------- */
+
+.hero__column--visual {
+  position: relative;
+  min-height: 868px;
+}
+
+.hero__figure {
+  position: relative;
+  top: 352px;
+  left: -343px;
+  margin: 0;
+  width: 670px;
+  height: 350px;
+}
+
+.hero__image {
+  display: block;
+  width: 670px;
+  height: 350px;
+  object-fit: cover;
+}
