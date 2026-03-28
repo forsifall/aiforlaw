@@ -6,4 +6,7 @@
 !/src/
 !/src/**
 
+node_modules/
+dist/
+
 cursor_rules.txt
