@@ -1,4 +1,5 @@
 const path = require("path");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
@@ -122,6 +123,16 @@ module.exports = (_env, argv) => {
     plugins: [
       new MiniCssExtractPlugin({
         filename: isProd ? "css/[name].[contenthash:8].css" : "css/[name].css",
+      }),
+      // Секции — сырой HTML: пути вроде assets/images/... должны лежать в dist (devServer смотрит только в dist).
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: path.resolve(__dirname, "src/assets"),
+            to: "assets",
+            noErrorOnMissing: true,
+          },
+        ],
       }),
       new CriticalCssInlineAndDeferPlugin({ isProd }),
       new HtmlWebpackPlugin({
