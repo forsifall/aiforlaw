@@ -6,32 +6,27 @@
   width: 100%;
   background-color: #000;
   background-image:
-    radial-gradient(
-      circle at 83.33333333333334% 13.333333333333334%,
+    radial-gradient(circle at 83.33333333333334% 13.333333333333334%,
       rgba(25, 19, 220, 0.39) 0%,
       12.354%,
-      rgba(25, 19, 220, 0) 29%
-    ),
-    radial-gradient(
-      circle at 88.33333333333333% 84.16666666666667%,
+      rgba(25, 19, 220, 0) 29%),
+    radial-gradient(circle at 88.33333333333333% 84.16666666666667%,
       rgba(125, 43, 196, 0.57) 0%,
       29.868000000000002%,
-      rgba(125, 43, 196, 0) 57%
-    ),
-    radial-gradient(
-      circle at 11.1865234375% 29.94140625%,
+      rgba(125, 43, 196, 0) 57%),
+    radial-gradient(circle at 11.1865234375% 29.94140625%,
       #3b2144 0%,
       35%,
-      rgba(59, 33, 68, 0) 50%
-    ),
-    radial-gradient(
-      circle at 48.9013671875% 49.521484375%,
+      rgba(59, 33, 68, 0) 50%),
+    radial-gradient(circle at 48.9013671875% 49.521484375%,
       rgba(0, 0, 0, 0) 0%,
       100%,
-      rgba(0, 0, 0, 0) 100%
-    );
+      rgba(0, 0, 0, 0) 100%);
   padding-bottom: 128px;
   overflow-x: hidden;
+  height: 100vh;
+  display: flex;
+  align-items: center;
 }
 
 .hero__container {
@@ -225,7 +220,6 @@
 @media (min-width: 1200px) {
   .hero {
     padding-bottom: clamp(40px, 4vw, 68px);
-    padding-top: 0px;
   }
 
   .hero__row {
@@ -281,6 +275,8 @@
 @media (max-width: 1199.98px) {
   .hero {
     padding-bottom: clamp(40px, 5vw, 68px);
+    padding-top: 64px;
+    height: 100%;
   }
 
   .hero__image {
@@ -344,10 +340,14 @@
     width: 100%;
     max-width: 22rem;
   }
+
+  .hero {
+    padding-top: 110px;
+  }
 }
 
 @media (max-width: 576px) {
- 
+
   .container_hero-title {
     margin-top: 33px !important;
   }
@@ -355,6 +355,10 @@
   .demo-form__actions {
     text-align: center;
     margin-top: 15px;
+  }
+
+  .hero {
+    padding-top: 64px;
   }
 }
 
