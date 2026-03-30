@@ -43,10 +43,8 @@
 }
 
 .neural-risks__icon {
-  flex-shrink: 0;
   width: 74px;
   height: 74px;
-  object-fit: contain;
   display: block;
 }
 
