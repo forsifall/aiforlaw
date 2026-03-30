@@ -224,6 +224,11 @@
 /* Десктоп ≥1200px целиком (в т.ч. 1920+): раньше max-width:1919 отрезал эти правила */
 @media (min-width: 1200px) {
   .hero {
+    /* JS может выставить 0px — без max() min-height схлопывается, fallback var() не сработает */
+    min-height: max(
+      var(--hero-fold-min-height, 0px),
+      calc(100svh - var(--header-current-height, 0px))
+    );
     padding-bottom: clamp(40px, 4vw, 68px);
     padding-top: 0px;
   }
@@ -280,6 +285,10 @@
 
 @media (max-width: 1199.98px) {
   .hero {
+    min-height: max(
+      var(--hero-fold-min-height, 0px),
+      calc(100svh - var(--header-current-height, 0px))
+    );
     padding-bottom: clamp(40px, 5vw, 68px);
   }
 

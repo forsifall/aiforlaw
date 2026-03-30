@@ -18,9 +18,42 @@ if (!header) {
     header.style.paddingBottom = "";
   }
 
+  function syncHeroFold(headerHeightPx) {
+    const hero = document.querySelector("#hero-section");
+    if (!hero) {
+      document.documentElement.style.removeProperty("--hero-fold-min-height");
+      return;
+    }
+    const vv = window.visualViewport;
+    const viewportH = Math.round(vv ? vv.height : window.innerHeight);
+    const headerH =
+      typeof headerHeightPx === "number"
+        ? Math.max(0, Math.round(headerHeightPx))
+        : Math.max(0, Math.round(header.getBoundingClientRect().height));
+
+    let foldPx = null;
+    if (window.matchMedia("(max-width: 1199.98px)").matches) {
+      foldPx = Math.max(0, viewportH - headerH);
+    } else if (window.matchMedia("(min-width: 1200px)").matches) {
+      foldPx = Math.max(0, viewportH - headerH);
+    }
+
+    if (foldPx === null) {
+      document.documentElement.style.removeProperty("--hero-fold-min-height");
+    } else {
+      /* 0px ломает min-height в CSS (валидное значение, без fallback) — не записываем */
+      if (foldPx > 0) {
+        document.documentElement.style.setProperty("--hero-fold-min-height", `${foldPx}px`);
+      } else {
+        document.documentElement.style.removeProperty("--hero-fold-min-height");
+      }
+    }
+  }
+
   function syncBodyPaddingFromHeader() {
     const h = Math.max(0, Math.round(header.getBoundingClientRect().height));
     document.documentElement.style.setProperty("--header-current-height", `${h}px`);
+    syncHeroFold(h);
   }
 
   function setHeaderHeight(px) {
