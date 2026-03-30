@@ -113,11 +113,6 @@ module.exports = (_env, argv) => {
           test: /\.(woff2|png|jpe?g|gif|webp|avif)$/i,
           type: "asset/resource",
         },
-        {
-          test: /\.html$/i,
-          include: path.resolve(__dirname, "src/sections"),
-          type: "asset/source",
-        },
       ],
     },
     plugins: [

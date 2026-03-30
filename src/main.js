@@ -22,7 +22,6 @@ import "./styles/release-roadmap.css";
 import "./styles/prosto-chel-cta.css";
 import "./styles/site-footer.css";
 
-import "./scripts/load-sections.js";
 import "./scripts/phone-validation.js";
 import "./scripts/header-scroll.js";
 import "./scripts/analytics-after-load.js";
