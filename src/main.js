@@ -1,6 +1,5 @@
 import "./styles/why-ai.css";
 import "./styles/business-problems.css";
-import "./styles/neural-risks.css";
 import "./styles/ai-implement.css";
 import "./styles/ai-how.css";
 import "./styles/market-transform.css";
