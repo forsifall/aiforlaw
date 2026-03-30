@@ -362,6 +362,8 @@
   }
 }
 
+/* что то */
+
 @media (max-width: 360px) {
   .hero__title {
     font-size: clamp(20px, 6vw + 4px, 26px);
