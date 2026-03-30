@@ -25,7 +25,7 @@ header {
 }
 
 body {
-  padding-top: var(--header-current-height, 0px);
+  /* padding-top: var(--header-current-height, 0px); */
   transition: padding-top 450ms ease;
   overflow-anchor: none;
 }
