@@ -170,6 +170,7 @@
   display: block;
   width: 100%;
   height: auto;
+  max-height: 24px;
 }
 
 .demo-form__input {
