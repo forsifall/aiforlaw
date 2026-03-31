@@ -102,6 +102,7 @@ function bindPhoneForm(form) {
   button.addEventListener("click", async () => {
     showErrors = true;
     syncUI();
+    input.value = '';
     if (button.disabled) return;
 
     button.disabled = true;
