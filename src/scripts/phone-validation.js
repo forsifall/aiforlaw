@@ -102,12 +102,12 @@ function bindPhoneForm(form) {
   button.addEventListener("click", async () => {
     showErrors = true;
     syncUI();
-    input.value = '';
     if (button.disabled) return;
 
     button.disabled = true;
     try {
       await sendPhoneToTelegram(input.value);
+      input.value = '';
     } catch (error) {
       console.error("Не удалось отправить заявку в Telegram:", error);
     } finally {
