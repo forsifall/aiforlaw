@@ -23,4 +23,3 @@ import "./styles/site-footer.css";
 
 import "./scripts/phone-validation.js";
 import "./scripts/header-scroll.js";
-import "./scripts/analytics-after-load.js";
