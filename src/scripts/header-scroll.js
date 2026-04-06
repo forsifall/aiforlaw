@@ -55,7 +55,7 @@ if (!header) {
 
     return h;
   }
-
+// dqiuhdw
   function applyExpandedLayout() {
     header.classList.remove("main-header--collapsed");
     clearInlinePadding();
