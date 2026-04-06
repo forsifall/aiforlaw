@@ -1,7 +1,5 @@
 const ERROR_TEXT = "Укажите телефон.";
 const THANK_YOU_URL = "./pages/thankyoupage.html";
-const TELEGRAM_BOT_TOKEN = "8282841735:AAFgfuCgMjJSHoj-MFAVNItCLSYoyy_k0RA";
-const TELEGRAM_CHAT_ID = "440129566";
 
 function normalizeDigits(value) {
   // оставил только цифры (пробелы/скобки/плюс не важны).
@@ -32,17 +30,20 @@ function formatPhoneForMessage(value) {
   return String(value ?? "").trim();
 }
 
-async function sendPhoneToTelegram(value) {
-  const message = `новая заявка! номер - ${formatPhoneForMessage(value)}`;
-  const url = new URL(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`);
-  url.searchParams.set("chat_id", TELEGRAM_CHAT_ID);
-  url.searchParams.set("text", message);
-
-  await fetch(url.toString(), {
-    method: "GET",
-    mode: "no-cors",
-    cache: "no-store",
+async function sendPhoneToServer(value) {
+  const response = await fetch("/lead-handler", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      phone: formatPhoneForMessage(value),
+    }),
   });
+
+  if (!response.ok) {
+    throw new Error(`Ошибка отправки заявки: ${response.status}`);
+  }
 }
 
 function ensureErrorElement(form, phoneWrapper) {
@@ -106,10 +107,10 @@ function bindPhoneForm(form) {
 
     button.disabled = true;
     try {
-      await sendPhoneToTelegram(input.value);
+      await sendPhoneToServer(input.value);
       input.value = '';
     } catch (error) {
-      console.error("Не удалось отправить заявку в Telegram:", error);
+      console.error("Не удалось отправить заявку на сервер:", error);
     } finally {
       window.location.href = THANK_YOU_URL;
     }
