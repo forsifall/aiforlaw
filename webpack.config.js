@@ -127,6 +127,11 @@ module.exports = (_env, argv) => {
             to: "assets",
             noErrorOnMissing: true,
           },
+          {
+            from: path.resolve(__dirname, "src/lead-handler.php"),
+            to: "lead-handler.php",
+            noErrorOnMissing: true,
+          },
         ],
       }),
       new CriticalCssInlineAndDeferPlugin({ isProd }),

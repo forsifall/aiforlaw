@@ -31,7 +31,7 @@ function formatPhoneForMessage(value) {
 }
 
 async function sendPhoneToServer(value) {
-  const response = await fetch("/lead-handler", {
+  const response = await fetch("/lead-handler.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
